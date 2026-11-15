@@ -62,7 +62,6 @@ h1 {
 
 .section {
   margin-top:10px;
-  break-inside:avoid;
 }
 
 .section-title {
@@ -194,6 +193,9 @@ button {
     font-size:8px;
     -webkit-print-color-adjust:exact;
     print-color-adjust:exact;
+
+    /* 缩小整个打印内容，尽量完整放进一张纸 */
+    zoom:0.82;
   }
 
   .page {
@@ -205,38 +207,43 @@ button {
   }
 
   header {
-    padding:9px;
+    padding:7px;
   }
 
-  .brand { font-size:21px; }
-  .tagline { font-size:9px; }
+  .brand { font-size:19px; }
+  .tagline { font-size:8px; }
 
   h1 {
-    font-size:14px;
-    margin:8px 0;
+    font-size:12px;
+    margin:5px 0;
   }
 
   .section {
-    margin-top:7px;
+    display:block !important;
+    visibility:visible !important;
+    margin-top:5px;
     break-inside:avoid;
+    page-break-inside:avoid;
   }
 
   .section-title {
-    padding:4px 7px;
+    padding:3px 6px;
     font-size:8px;
   }
 
   .grid {
-    gap:4px 10px;
-    padding-top:5px;
+    gap:3px 8px;
+    padding-top:3px;
   }
 
-  label { font-size:7px; }
+  label {
+    font-size:7px;
+  }
 
   input, select, textarea {
-    height:22px;
-    padding:2px 5px;
-    font-size:9px;
+    height:19px;
+    padding:1px 4px;
+    font-size:8px;
     border:0;
     border-bottom:1px solid #aaa;
     border-radius:0;
@@ -254,14 +261,33 @@ button {
   }
 
   input::-webkit-date-and-time-value {
-    text-align:left;
+    text-align:left !important;
     margin:0;
   }
 
   textarea {
-    height:30px;
-    min-height:30px;
+    height:23px;
+    min-height:23px;
     border:1px solid #aaa;
+  }
+
+  /* 确保 Trip Details 及其内部字段不会被隐藏 */
+  #tripDetails,
+  #tripDetails * {
+    display:revert;
+    visibility:visible !important;
+  }
+
+  #tripDetails .grid {
+    display:grid !important;
+  }
+
+  #tripDetails .field {
+    display:flex !important;
+  }
+
+  #tripDetails .full {
+    grid-column:1/-1;
   }
 
   .actions {
@@ -372,7 +398,7 @@ button {
   </div>
 </div>
 
-<div class="section">
+<div class="section" id="tripDetails">
   <div class="section-title">TRIP DETAILS</div>
 
   <div class="grid">
