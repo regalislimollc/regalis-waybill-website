@@ -1,1 +1,372 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Regalis Limo | Electronic Waybill</title>
+<style>
+:root {
+  --black:#171717;
+  --gold:#b99a5b;
+  --light:#f5f3ee;
+  --border:#d8d5ce;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  padding:20px;
+  background:#ecebe7;
+  color:#222;
+  font-family:Arial,Helvetica,sans-serif;
+}
+.page {
+  max-width:850px;
+  margin:0 auto;
+  background:white;
+  padding:30px 38px;
+  box-shadow:0 3px 18px #0001;
+}
+header {
+  background:var(--black);
+  color:white;
+  text-align:center;
+  padding:22px 12px;
+  border-bottom:4px solid var(--gold);
+}
+.brand {
+  font-family:Georgia,serif;
+  font-size:30px;
+  letter-spacing:4px;
+}
+.tagline {
+  color:#d8c49a;
+  font-size:12px;
+  font-style:italic;
+  margin-top:7px;
+}
+h1 {
+  text-align:center;
+  font-size:21px;
+  letter-spacing:2px;
+  margin:25px 0 18px;
+}
+.section {
+  margin-top:20px;
+}
+.section-title {
+  background:var(--black);
+  color:white;
+  padding:8px 10px;
+  font-size:12px;
+  font-weight:bold;
+  letter-spacing:1px;
+  border-left:4px solid var(--gold);
+}
+.grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  padding:13px 0 0;
+}
+.field {
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+  min-width:0;
+}
+.full { grid-column:1/-1; }
+label {
+  font-size:11px;
+  font-weight:bold;
+  color:#555;
+  text-transform:uppercase;
+}
+input,select,textarea {
+  width:100%;
+  border:1px solid var(--border);
+  border-radius:3px;
+  padding:9px;
+  font-size:14px;
+  font-family:inherit;
+  background:#fff;
+  color:#222;
+}
+textarea {
+  min-height:65px;
+  resize:vertical;
+}
+input:focus,select:focus,textarea:focus {
+  outline:1px solid var(--gold);
+  border-color:var(--gold);
+}
+.waybill-top {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  background:var(--light);
+  padding:13px;
+}
+.signatures {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:25px;
+  margin-top:25px;
+}
+.signature-line {
+  border-bottom:1px solid #555;
+  height:45px;
+}
+.signature-caption {
+  font-size:11px;
+  color:#555;
+  margin-top:7px;
+}
+.notice {
+  font-size:10px;
+  line-height:1.5;
+  color:#666;
+  margin-top:22px;
+  border-top:1px solid var(--border);
+  padding-top:10px;
+}
+.actions {
+  max-width:850px;
+  margin:15px auto;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+button {
+  border:0;
+  padding:13px 18px;
+  border-radius:4px;
+  font-size:14px;
+  font-weight:bold;
+  cursor:pointer;
+}
+.primary {
+  background:var(--black);
+  color:white;
+}
+.secondary {
+  background:var(--gold);
+  color:#171717;
+}
+@media(max-width:600px) {
+  body { padding:8px; }
+  .page { padding:16px; }
+  .grid,.waybill-top,.signatures { grid-template-columns:1fr; }
+  .brand { font-size:25px; }
+}
+@media print {
+  @page { size:Letter; margin:0.45in; }
+  body { padding:0; background:white; }
+  .page { box-shadow:none; padding:0; max-width:none; }
+  .actions,.no-print { display:none !important; }
+  input,select,textarea {
+    border:0;
+    border-bottom:1px solid #aaa;
+    border-radius:0;
+    padding:5px 2px;
+    appearance:none;
+    background:white;
+  }
+  textarea { border:1px solid #aaa; }
+  .section { break-inside:avoid; }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+  <header>
+    <div class="brand">REGALIS LIMO</div>
+    <div class="tagline">Ride Regal Arrive in Style</div>
+  </header>
+
+  <h1>ELECTRONIC WAYBILL</h1>
+
+  <div class="waybill-top">
+    <div class="field">
+      <label>Waybill Number</label>
+      <input id="waybill" readonly>
+    </div>
+    <div class="field">
+      <label>Service Date</label>
+      <input id="serviceDate" type="date">
+    </div>
+    <div class="field">
+      <label>Pickup Time</label>
+      <input type="time">
+    </div>
+    <div class="field">
+      <label>Service Type</label>
+      <select>
+        <option>Point-to-Point</option>
+        <option>Airport Transfer</option>
+        <option>Hourly Charter</option>
+        <option>As Directed</option>
+        <option>Other</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">CARRIER & VEHICLE INFORMATION</div>
+    <div class="grid">
+      <div class="field">
+        <label>TCP Permit Number</label>
+        <input placeholder="Enter TCP number">
+      </div>
+      <div class="field">
+        <label>Company Name</label>
+        <input value="Regalis Limo">
+      </div>
+      <div class="field">
+        <label>Vehicle Make / Model</label>
+        <input value="Chevrolet Suburban">
+      </div>
+      <div class="field">
+        <label>Vehicle License Plate</label>
+        <input placeholder="Enter license plate">
+      </div>
+      <div class="field">
+        <label>Driver Name</label>
+        <input placeholder="Enter driver name">
+      </div>
+      <div class="field">
+        <label>Driver Phone</label>
+        <input type="tel" placeholder="Enter phone number">
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">PASSENGER & RESERVATION INFORMATION</div>
+    <div class="grid">
+      <div class="field">
+        <label>Lead Passenger Name</label>
+        <input placeholder="Passenger full name">
+      </div>
+      <div class="field">
+        <label>Passenger Phone</label>
+        <input type="tel" placeholder="Passenger phone">
+      </div>
+      <div class="field">
+        <label>Number of Passengers</label>
+        <input type="number" min="1" value="1">
+      </div>
+      <div class="field">
+        <label>Reservation / Booking Number</label>
+        <input placeholder="Booking reference">
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">TRIP DETAILS</div>
+    <div class="grid">
+      <div class="field full">
+        <label>Pickup Address</label>
+        <input placeholder="Full pickup address">
+      </div>
+      <div class="field full">
+        <label>Destination Address</label>
+        <input placeholder="Full destination address">
+      </div>
+      <div class="field">
+        <label>Scheduled Start</label>
+        <input type="datetime-local">
+      </div>
+      <div class="field">
+        <label>Scheduled End</label>
+        <input type="datetime-local">
+      </div>
+      <div class="field">
+        <label>Fare / Charter Charge ($)</label>
+        <input type="number" min="0" step="0.01" placeholder="0.00">
+      </div>
+      <div class="field">
+        <label>Payment Method</label>
+        <select>
+          <option>Credit Card</option>
+          <option>Cash</option>
+          <option>Corporate Account</option>
+          <option>Prepaid</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="field full">
+        <label>Additional Stops / Notes</label>
+        <textarea placeholder="Enter additional stops or trip notes"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">ACKNOWLEDGMENT & SIGNATURES</div>
+    <p style="font-size:11px;line-height:1.5">
+      The transportation service described above is provided by the carrier
+      identified on this waybill pursuant to the applicable reservation and
+      transportation arrangements.
+    </p>
+    <div class="signatures">
+      <div>
+        <div class="signature-line"></div>
+        <div class="signature-caption">Driver Signature</div>
+      </div>
+      <div>
+        <div class="signature-line"></div>
+        <div class="signature-caption">Passenger / Authorized Representative Signature</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="notice">
+    REGALIS LIMO · Ride Regal Arrive in Style<br>
+    Electronic waybill generated for the transportation service described above.
+    Please verify all trip and reservation details before use.
+  </div>
+</div>
+
+<div class="actions">
+  <button class="primary" onclick="window.print()">PRINT / SAVE PDF</button>
+  <button class="secondary" onclick="newWaybill()">NEW WAYBILL</button>
+</div>
+
+<script>
+function generateNumber() {
+  const now = new Date();
+  const date = now.getFullYear().toString() +
+    String(now.getMonth()+1).padStart(2,'0') +
+    String(now.getDate()).padStart(2,'0');
+  const random = Math.floor(1000 + Math.random()*9000);
+  return 'RL-' + date + '-' + random;
+}
+
+function setToday() {
+  const d = new Date();
+  const local = new Date(d.getTime() - d.getTimezoneOffset()*60000);
+  document.getElementById('serviceDate').value =
+    local.toISOString().slice(0,10);
+}
+
+function newWaybill() {
+  if (!confirm('Start a new waybill? Unsaved information will be cleared.')) return;
+  document.querySelectorAll('input:not([readonly]), textarea').forEach(el => {
+    if (el.type === 'number') el.value = el.defaultValue || '';
+    else el.value = '';
+  });
+  document.querySelectorAll('select').forEach(el => el.selectedIndex = 0);
+  document.querySelector('input[readonly]').value = generateNumber();
+  setToday();
+}
+
+document.getElementById('waybill').value = generateNumber();
+setToday();
+</script>
+
+</body>
+</html>
+
