@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Regalis Limo - Electronic Waybill</title>
+
 <style>
 * { box-sizing:border-box; }
 
@@ -89,7 +90,9 @@ h1 {
   min-width:0;
 }
 
-.full { grid-column:1/-1; }
+.full {
+  grid-column:1/-1;
+}
 
 label {
   font-size:9px;
@@ -115,7 +118,6 @@ input, select, textarea {
   margin:0;
 }
 
-/* Force date and time values to align left on iPhone */
 input[type="date"],
 input[type="time"],
 input[type="datetime-local"] {
@@ -136,7 +138,7 @@ input::-webkit-date-and-time-value {
 textarea {
   height:38px;
   min-height:38px;
-  resize:none;
+  resize:vertical;
 }
 
 .actions {
@@ -145,6 +147,7 @@ textarea {
   display:flex;
   justify-content:center;
   gap:10px;
+  flex-wrap:wrap;
 }
 
 button {
@@ -261,7 +264,9 @@ button {
     border:1px solid #aaa;
   }
 
-  .actions { display:none !important; }
+  .actions {
+    display:none !important;
+  }
 }
 </style>
 </head>
@@ -279,6 +284,7 @@ button {
 
 <div class="section">
   <div class="section-title">SERVICE INFORMATION</div>
+
   <div class="grid">
 
     <div class="field">
@@ -302,11 +308,17 @@ button {
       </select>
     </div>
 
+    <div class="field">
+      <label>Flight Number</label>
+      <input type="text" placeholder="e.g. UA 123">
+    </div>
+
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">CARRIER & VEHICLE INFORMATION</div>
+
   <div class="grid">
 
     <div class="field">
@@ -339,6 +351,7 @@ button {
 
 <div class="section">
   <div class="section-title">PASSENGER INFORMATION</div>
+
   <div class="grid">
 
     <div class="field">
@@ -361,6 +374,7 @@ button {
 
 <div class="section">
   <div class="section-title">TRIP DETAILS</div>
+
   <div class="grid">
 
     <div class="field full">
@@ -397,6 +411,7 @@ button {
   <button class="primary" onclick="window.print()">
     PRINT / SAVE PDF
   </button>
+
   <button class="secondary" onclick="newWaybill()">
     NEW WAYBILL
   </button>
@@ -408,6 +423,7 @@ function setToday() {
   const local = new Date(
     d.getTime() - d.getTimezoneOffset()*60000
   );
+
   document.getElementById("serviceDate").value =
     local.toISOString().slice(0,10);
 }
