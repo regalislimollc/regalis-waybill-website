@@ -6,25 +6,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Regalis Limo - Electronic Waybill</title>
 <style>
+* { box-sizing:border-box; }
+
 :root {
   --black:#171717;
   --gold:#b99a5b;
   --border:#d8d5ce;
 }
-* { box-sizing:border-box; }
 
 body {
   margin:0;
-  padding:18px;
+  padding:12px;
   background:#ecebe7;
   color:#222;
   font-family:Arial,Helvetica,sans-serif;
 }
 
 .page {
+  width:100%;
   max-width:850px;
   margin:auto;
-  padding:25px 32px;
+  padding:22px 28px;
   background:white;
   box-shadow:0 3px 18px #0001;
 }
@@ -33,64 +35,64 @@ header {
   background:var(--black);
   color:white;
   text-align:center;
-  padding:17px 10px;
-  border-bottom:4px solid var(--gold);
+  padding:13px;
+  border-bottom:3px solid var(--gold);
 }
 
 .brand {
   font-family:Georgia,serif;
-  font-size:28px;
-  letter-spacing:4px;
+  font-size:25px;
+  letter-spacing:3px;
 }
 
 .tagline {
   color:#d8c49a;
-  font-size:12px;
+  font-size:10px;
   font-style:italic;
-  margin-top:5px;
+  margin-top:4px;
 }
 
 h1 {
   text-align:center;
-  font-size:20px;
+  font-size:17px;
   letter-spacing:2px;
-  margin:18px 0 14px;
+  margin:12px 0;
 }
 
 .section {
-  margin-top:14px;
+  margin-top:10px;
+  break-inside:avoid;
 }
 
 .section-title {
   background:var(--black);
   color:white;
-  padding:7px 10px;
-  font-size:11px;
+  padding:5px 8px;
+  font-size:10px;
   font-weight:bold;
   letter-spacing:1px;
-  border-left:4px solid var(--gold);
+  border-left:3px solid var(--gold);
 }
 
 .grid {
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:9px 14px;
-  padding-top:10px;
+  gap:6px 12px;
+  padding-top:7px;
 }
 
 .field {
   display:flex;
   flex-direction:column;
-  gap:4px;
+  align-items:stretch;
+  gap:3px;
   min-width:0;
 }
 
-.full {
-  grid-column:1/-1;
-}
+.full { grid-column:1/-1; }
 
 label {
-  font-size:10px;
+  font-size:9px;
   font-weight:bold;
   color:#555;
   text-transform:uppercase;
@@ -100,68 +102,56 @@ input, select, textarea {
   display:block;
   width:100%;
   min-width:0;
+  height:27px;
   border:1px solid var(--border);
   border-radius:2px;
-  padding:7px 8px;
+  padding:4px 7px;
   font-family:Arial,Helvetica,sans-serif;
-  font-size:12px;
+  font-size:11px;
   color:#222;
   background:white;
-  text-align:left;
+  text-align:left !important;
   direction:ltr;
+  margin:0;
 }
 
-input[type="time"],
+/* Force date and time values to align left on iPhone */
 input[type="date"],
+input[type="time"],
 input[type="datetime-local"] {
+  text-align:left !important;
+  direction:ltr !important;
+  -webkit-appearance:none;
+  appearance:none;
+  justify-content:flex-start;
+  padding-left:7px;
+}
+
+input::-webkit-date-and-time-value {
   text-align:left;
-  direction:ltr;
+  margin:0;
+  min-width:100%;
 }
 
 textarea {
-  min-height:48px;
-  resize:vertical;
-}
-
-.signatures {
-  display:grid;
-  grid-template-columns:1fr;
-  margin-top:15px;
-}
-
-.signature-line {
-  height:35px;
-  border-bottom:1px solid #555;
-}
-
-.signature-caption {
-  font-size:10px;
-  margin-top:5px;
-  color:#555;
-}
-
-.notice {
-  font-size:9px;
-  line-height:1.4;
-  color:#666;
-  margin-top:14px;
-  border-top:1px solid var(--border);
-  padding-top:8px;
+  height:38px;
+  min-height:38px;
+  resize:none;
 }
 
 .actions {
   max-width:850px;
-  margin:15px auto;
+  margin:14px auto;
   display:flex;
-  gap:10px;
   justify-content:center;
+  gap:10px;
 }
 
 button {
   border:0;
-  padding:12px 18px;
+  padding:11px 17px;
   border-radius:4px;
-  font-size:14px;
+  font-size:13px;
   font-weight:bold;
   cursor:pointer;
 }
@@ -177,29 +167,28 @@ button {
 }
 
 @media(max-width:600px) {
-  body { padding:8px; }
-  .page { padding:14px; }
+  body { padding:6px; }
+  .page { padding:12px; }
   .grid { grid-template-columns:1fr; }
   .full { grid-column:auto; }
-  .brand { font-size:24px; }
+  .brand { font-size:23px; }
 }
 
 @media print {
   @page {
     size:Letter portrait;
-    margin:0.25in;
+    margin:0.2in;
   }
 
   html, body {
-    width:auto;
-    height:auto;
-    margin:0;
-    padding:0;
+    margin:0 !important;
+    padding:0 !important;
+    width:100%;
     background:white;
   }
 
   body {
-    font-size:9px;
+    font-size:8px;
     -webkit-print-color-adjust:exact;
     print-color-adjust:exact;
   }
@@ -213,84 +202,66 @@ button {
   }
 
   header {
-    padding:10px;
+    padding:9px;
   }
 
-  .brand {
-    font-size:23px;
-  }
-
-  .tagline {
-    font-size:10px;
-    margin-top:3px;
-  }
+  .brand { font-size:21px; }
+  .tagline { font-size:9px; }
 
   h1 {
-    font-size:16px;
-    margin:10px 0;
+    font-size:14px;
+    margin:8px 0;
   }
 
   .section {
-    margin-top:9px;
+    margin-top:7px;
     break-inside:avoid;
   }
 
   .section-title {
-    padding:5px 8px;
-    font-size:9px;
-  }
-
-  .grid {
-    gap:5px 12px;
-    padding-top:6px;
-  }
-
-  label {
+    padding:4px 7px;
     font-size:8px;
   }
 
+  .grid {
+    gap:4px 10px;
+    padding-top:5px;
+  }
+
+  label { font-size:7px; }
+
   input, select, textarea {
-    font-size:10px;
-    padding:4px 5px;
+    height:22px;
+    padding:2px 5px;
+    font-size:9px;
     border:0;
     border-bottom:1px solid #aaa;
     border-radius:0;
     background:white;
     color:black;
-    min-height:20px;
   }
 
-  textarea {
-    min-height:32px;
-    border:1px solid #aaa;
-  }
-
-  .signatures {
-    margin-top:8px;
-  }
-
-  .signature-line {
-    height:24px;
-  }
-
-  .signature-caption {
-    font-size:8px;
-  }
-
-  .notice {
-    font-size:8px;
-    margin-top:8px;
-    padding-top:5px;
-  }
-
-  .actions {
-    display:none !important;
-  }
-
-  input, select, textarea {
+  input[type="date"],
+  input[type="time"],
+  input[type="datetime-local"] {
+    text-align:left !important;
+    direction:ltr !important;
     -webkit-appearance:none;
     appearance:none;
   }
+
+  input::-webkit-date-and-time-value {
+    text-align:left;
+    margin:0;
+  }
+
+  textarea {
+    height:30px;
+    min-height:30px;
+    border:1px solid #aaa;
+  }
+
+  .actions { display:none !important; }
 }
 </style>
 </head>
@@ -309,9 +280,10 @@ button {
 <div class="section">
   <div class="section-title">SERVICE INFORMATION</div>
   <div class="grid">
+
     <div class="field">
       <label>Service Date</label>
-      <input id="serviceDate" type="date">
+      <input type="date" id="serviceDate">
     </div>
 
     <div class="field">
@@ -329,12 +301,14 @@ button {
         <option>Other</option>
       </select>
     </div>
+
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">CARRIER & VEHICLE INFORMATION</div>
   <div class="grid">
+
     <div class="field">
       <label>TCP Permit Number</label>
       <input placeholder="Enter TCP number">
@@ -359,12 +333,14 @@ button {
       <label>Driver Name</label>
       <input placeholder="Enter driver name">
     </div>
+
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">PASSENGER INFORMATION</div>
   <div class="grid">
+
     <div class="field">
       <label>Lead Passenger Name</label>
       <input placeholder="Passenger full name">
@@ -379,12 +355,14 @@ button {
       <label>Number of Passengers</label>
       <input type="number" min="1" value="1">
     </div>
+
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">TRIP DETAILS</div>
   <div class="grid">
+
     <div class="field full">
       <label>Pickup Address</label>
       <input placeholder="Full pickup address">
@@ -409,50 +387,35 @@ button {
       <label>Additional Stops / Notes</label>
       <textarea placeholder="Enter additional stops or trip notes"></textarea>
     </div>
+
   </div>
-</div>
-
-<div class="section">
-  <div class="section-title">PASSENGER ACKNOWLEDGMENT</div>
-  <p style="font-size:10px;line-height:1.4">
-    The transportation service described above is provided by the carrier
-    identified on this waybill pursuant to the applicable reservation and
-    transportation arrangements.
-  </p>
-
-  <div class="signatures">
-    <div>
-      <div class="signature-line"></div>
-      <div class="signature-caption">
-        Passenger / Authorized Representative Signature
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="notice">
-  REGALIS LIMO · Ride Regal Arrive in Style<br>
-  Electronic waybill generated for the transportation service described above.
-  Please verify all trip details before use.
 </div>
 
 </div>
 
 <div class="actions">
-  <button class="primary" onclick="window.print()">PRINT / SAVE PDF</button>
-  <button class="secondary" onclick="newWaybill()">NEW WAYBILL</button>
+  <button class="primary" onclick="window.print()">
+    PRINT / SAVE PDF
+  </button>
+  <button class="secondary" onclick="newWaybill()">
+    NEW WAYBILL
+  </button>
 </div>
 
 <script>
 function setToday() {
   const d = new Date();
-  const local = new Date(d.getTime() - d.getTimezoneOffset()*60000);
+  const local = new Date(
+    d.getTime() - d.getTimezoneOffset()*60000
+  );
   document.getElementById("serviceDate").value =
     local.toISOString().slice(0,10);
 }
 
 function newWaybill() {
-  if (!confirm("Start a new waybill? All entered information will be cleared.")) return;
+  if (!confirm("Start a new waybill? All information will be cleared.")) {
+    return;
+  }
 
   document.querySelectorAll("input, textarea").forEach(el => {
     if (el.type === "number") {
