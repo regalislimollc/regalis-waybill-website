@@ -7,7 +7,9 @@
 <title>Regalis Limo - Electronic Waybill</title>
 
 <style>
-* { box-sizing:border-box; }
+* {
+  box-sizing:border-box;
+}
 
 :root {
   --black:#171717;
@@ -124,7 +126,6 @@ input[type="datetime-local"] {
   direction:ltr !important;
   -webkit-appearance:none;
   appearance:none;
-  justify-content:flex-start;
   padding-left:7px;
 }
 
@@ -169,14 +170,29 @@ button {
 }
 
 @media(max-width:600px) {
-  body { padding:6px; }
-  .page { padding:12px; }
-  .grid { grid-template-columns:1fr; }
-  .full { grid-column:auto; }
-  .brand { font-size:23px; }
+  body {
+    padding:6px;
+  }
+
+  .page {
+    padding:12px;
+  }
+
+  .grid {
+    grid-template-columns:1fr;
+  }
+
+  .full {
+    grid-column:auto;
+  }
+
+  .brand {
+    font-size:23px;
+  }
 }
 
 @media print {
+
   @page {
     size:Letter portrait;
     margin:0.2in;
@@ -190,12 +206,10 @@ button {
   }
 
   body {
-    font-size:8px;
+    font-size:9px;
     -webkit-print-color-adjust:exact;
     print-color-adjust:exact;
-
-    /* 缩小整个打印内容，尽量完整放进一张纸 */
-    zoom:0.82;
+    zoom:0.90;
   }
 
   .page {
@@ -207,43 +221,59 @@ button {
   }
 
   header {
-    padding:7px;
+    padding:6px;
   }
 
-  .brand { font-size:19px; }
-  .tagline { font-size:8px; }
+  .brand {
+    font-size:20px;
+  }
+
+  .tagline {
+    font-size:8px;
+  }
 
   h1 {
-    font-size:12px;
+    font-size:13px;
     margin:5px 0;
   }
 
   .section {
     display:block !important;
     visibility:visible !important;
-    margin-top:5px;
+    margin-top:4px;
     break-inside:avoid;
     page-break-inside:avoid;
   }
 
   .section-title {
     padding:3px 6px;
-    font-size:8px;
+    font-size:9px;
   }
 
   .grid {
+    display:grid !important;
+    grid-template-columns:1fr 1fr;
     gap:3px 8px;
     padding-top:3px;
   }
 
+  .field {
+    display:flex !important;
+    flex-direction:column;
+  }
+
+  .full {
+    grid-column:1/-1;
+  }
+
   label {
-    font-size:7px;
+    font-size:8px;
   }
 
   input, select, textarea {
-    height:19px;
-    padding:1px 4px;
-    font-size:8px;
+    height:22px;
+    padding:2px 5px;
+    font-size:10px;
     border:0;
     border-bottom:1px solid #aaa;
     border-radius:0;
@@ -258,6 +288,7 @@ button {
     direction:ltr !important;
     -webkit-appearance:none;
     appearance:none;
+    font-size:10px;
   }
 
   input::-webkit-date-and-time-value {
@@ -266,16 +297,17 @@ button {
   }
 
   textarea {
-    height:23px;
-    min-height:23px;
+    height:25px;
+    min-height:25px;
+    font-size:10px;
     border:1px solid #aaa;
   }
 
-  /* 确保 Trip Details 及其内部字段不会被隐藏 */
-  #tripDetails,
-  #tripDetails * {
-    display:revert;
+  #tripDetails {
+    display:block !important;
     visibility:visible !important;
+    break-inside:avoid;
+    page-break-inside:avoid;
   }
 
   #tripDetails .grid {
@@ -284,10 +316,6 @@ button {
 
   #tripDetails .field {
     display:flex !important;
-  }
-
-  #tripDetails .full {
-    grid-column:1/-1;
   }
 
   .actions {
@@ -434,6 +462,7 @@ button {
 </div>
 
 <div class="actions">
+
   <button class="primary" onclick="window.print()">
     PRINT / SAVE PDF
   </button>
@@ -441,11 +470,13 @@ button {
   <button class="secondary" onclick="newWaybill()">
     NEW WAYBILL
   </button>
+
 </div>
 
 <script>
 function setToday() {
   const d = new Date();
+
   const local = new Date(
     d.getTime() - d.getTimezoneOffset()*60000
   );
@@ -455,16 +486,19 @@ function setToday() {
 }
 
 function newWaybill() {
+
   if (!confirm("Start a new waybill? All information will be cleared.")) {
     return;
   }
 
   document.querySelectorAll("input, textarea").forEach(el => {
+
     if (el.type === "number") {
       el.value = el.defaultValue || "1";
     } else if (el.type !== "date") {
       el.value = "";
     }
+
   });
 
   document.querySelectorAll("select").forEach(el => {
